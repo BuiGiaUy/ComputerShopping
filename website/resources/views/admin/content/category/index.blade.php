@@ -1,84 +1,35 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        /* resources/css/custom.css */
-
-        .container {
-            margin: 0 auto;
-            max-width: 960px;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Categories</h1>
-
-        <a href="{{ route('admin.category.add') }}" class="btn btn-primary">Add Category</a>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($categories as $category)
+@extends("layout.adminLayoutPage")
+@section('content')
+    <div class="tables">
+        <div class="table-responsive bs-example widget-shadow">
+            <h4>Danh sách danh mục:</h4>
+            <a href="#"><button type="button" class="btn btn-success ">Thêm danh mục</button></a>
+            <table class="table table-bordered">
+                <thead>
                 <tr>
-                    <td>{{ $category['id'] }}</td>
-                    <td>{{ $category['name'] }}</td>
-                    <td>
-                        <a href="{{ route('admin.category.edit', $category['id']) }}" class="btn btn-primary">Edit</a>
-                        <!-- You can add a delete button or link here if needed -->
-                    </td>
+                    <th>#</th>
+                    <th>Tên danh mục</th>
+                    <th>Slug</th>
+                    <th>Hành động</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach($categories as $item)
+                    <tr>
+                        <th scope="row">{{$item->id}}</th>
+                        <td>{{$item->name}}</td>
+                        <td>{{$item->slug}}</td>
+                        <td>
+                            <img src="{{$item->icon}}" style="width: 50px; height: 50px" alt="">
+                        </td>
+                        <td>
+                            <a href="#">Sửa</a>
+                            <a href="#">Xóa</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-
-
-</body>
-</html>
+@endsection
